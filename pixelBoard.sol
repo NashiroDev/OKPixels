@@ -20,6 +20,10 @@ contract PixelBoard {
 
     modifier whenNotPaused() {
         require(!paused, "Contract is paused");
+        require(
+            lastAllowedTimestamp == 0 || block.timestamp <= lastAllowedTimestamp,
+            "Pixel placement window expired"
+        );
         _;
     }
 
@@ -60,6 +64,8 @@ contract PixelBoard {
     string[] public allCommunities;
     address[] public allPixelUsers;
     bool public paused;
+    uint256 public firstUnpauseTimestamp;
+    uint256 public lastAllowedTimestamp;
     uint256 public constant BASE_COST = 0.000022 ether;
     uint256 public constant COST_MULTIPLIER = 115; // 115% = 1.15x
     uint256 public constant COST_DIVISOR = 100;
@@ -81,9 +87,10 @@ contract PixelBoard {
 
     constructor() {
         _owner = msg.sender;
+        paused = true;
 
         string[16] memory colors = [
-            "white", "black", "gray", "silver", "maroon", "red", "purple", "fuscia",
+            "white", "black", "gray", "silver", "maroon", "red", "purple", "fuchsia",
             "green", "lime", "olive", "yellow", "navy", "blue", "teal", "aqua"
         ];
         for (uint256 i = 0; i < colors.length; i++) {
@@ -307,7 +314,16 @@ contract PixelBoard {
     }
 
     function pause(bool _paused) external onlyOwner {
-        paused = _paused;
+        if (!paused && _paused) {
+            paused = true;
+        } else if (paused && !_paused) {
+            // First unpause
+            if (firstUnpauseTimestamp == 0) {
+                firstUnpauseTimestamp = block.timestamp;
+                lastAllowedTimestamp = block.timestamp + 7 days;
+            }
+            paused = false;
+        }
     }
     function getAllCommunities() external view returns (string[] memory) {
         return allCommunities;

@@ -15,6 +15,6 @@
 <p> <em>Join us, contribute your pixels, and enjoy the experience!</em> </p> </body> </html>
 
 <h2>Links</h2>
-<h4>pixelBoard.sol : 0x7a3CC9C3A0E094b7aBCBFb11d6EcbbD38465a6CA at (https://basescan.org/address/0x7a3CC9C3A0E094b7aBCBFb11d6EcbbD38465a6CA#writeContract)</h4>
-<h4>Dapp : (https://okpixels.surge.sh/)</h4>
+<h4>pixelBoard.sol : 0x3E29BE064A2Cb538f459b038EdFc814c922Fef95 at (https://basescan.org/address/0x3E29BE064A2Cb538f459b038EdFc814c922Fef95#writeContract)</h4>
+<h4>Dapp : (https://eventokpixels.surge.sh/)</h4>
 <h4>OKC for board 0,1,2,3 in order : 68, 2110, 2627, 3787<li>https://68.okcomputers.eth.limo</li><li>https://2110.okcomputers.eth.limo</li><li>https://2627.okcomputers.eth.limo</li><li>https://3787.okcomputers.eth.limo</li></h4>
